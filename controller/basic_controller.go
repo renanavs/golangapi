@@ -9,17 +9,17 @@ import (
 type BasicController struct {
 }
 
-func (controller BasicController) LIST(c *gin.Context) {
+func (controller BasicController) List(c *gin.Context) {
 	c.JSON(200, "LIST")
 }
 
-func (controller BasicController) CREATE(c *gin.Context) {
+func (controller BasicController) Create(c *gin.Context) {
 	c.JSON(200, "CREATE")
 }
 
-func (controller BasicController) READ(c *gin.Context) {
-	user_id, ok := c.Params.Get("id")
-	if !ok {
+func (controller BasicController) Read(c *gin.Context) {
+	user_id, err := c.Params.Get("id")
+	if !err {
 		c.JSON(http.StatusBadGateway, gin.H{
 			"message": "user doesn't exist",
 		})
@@ -30,9 +30,9 @@ func (controller BasicController) READ(c *gin.Context) {
 	})
 }
 
-func (controller BasicController) UPDATE(c *gin.Context) {
-	user_id, ok := c.Params.Get("id")
-	if !ok {
+func (controller BasicController) Update(c *gin.Context) {
+	user_id, err := c.Params.Get("id")
+	if !err {
 		c.JSON(http.StatusBadGateway, gin.H{
 			"message": "user doesn't exist",
 		})
@@ -43,9 +43,9 @@ func (controller BasicController) UPDATE(c *gin.Context) {
 	})
 }
 
-func (controller BasicController) DELETE(c *gin.Context) {
-	user_id, ok := c.Params.Get("id")
-	if !ok {
+func (controller BasicController) Delete(c *gin.Context) {
+	user_id, err := c.Params.Get("id")
+	if !err {
 		c.JSON(http.StatusBadGateway, gin.H{
 			"message": "user doesn't exist",
 		})
