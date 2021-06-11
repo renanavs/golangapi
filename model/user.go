@@ -7,41 +7,41 @@ import (
 
 type User struct {
 	entity.BasicEntity
-	name     string
-	login    string
-	password string
-	email    string
+	Name     string `json:"name"`
+	Login    string `json:"login"`
+	Password string `json:"password"`
+	Email    string `json:"email"`
 }
 
 func (u *User) GetName() string {
-	return u.name
+	return u.Name
 }
 
 func (u *User) SetName(n string) {
-	u.name = n
+	u.Name = n
 }
 
 func (u *User) GetLogin() string {
-	return u.login
+	return u.Login
 }
 
 func (u *User) SetLogin(l string) {
-	u.login = l
+	u.Login = l
 }
 
 func (u *User) GetEmail() string {
-	return u.email
+	return u.Email
 }
 
 func (u *User) SetEmail(e string) {
-	u.email = e
+	u.Email = e
 }
 
 func (u *User) setPassword(p string) {
-	u.password = p
+	u.Password = p
 }
 
-func (u *User) ChangePassword(d string, e crypt.Encrypter) {
-	encrypted := e.EncryptPassword(d)
+func (u *User) ChangePassword(raw_password string, e crypt.Encrypter) {
+	encrypted := e.EncryptPassword(raw_password)
 	u.setPassword(encrypted)
 }

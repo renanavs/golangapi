@@ -1,7 +1,7 @@
 package server
 
 import (
-	controller "projectapi/controller"
+	"projectapi/controller"
 
 	"github.com/gin-gonic/gin"
 )

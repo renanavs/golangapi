@@ -1,6 +1,7 @@
 package database
 
 import (
+	"errors"
 	"log"
 	"time"
 
@@ -10,11 +11,13 @@ import (
 
 var db *gorm.DB
 
-func StartDB() {
-	database, err := gorm.Open(mysql.Open(""))
+func StartDB() error {
+	dsn := "root@tcp(127.0.0.1:3306)/projectapi"
+	database, err := gorm.Open(mysql.Open(dsn))
 
 	if err != nil {
-		log.Fatal("Cannot connect to database")
+		log.Fatal(err)
+		return err
 	}
 
 	db = database
@@ -25,12 +28,13 @@ func StartDB() {
 	config.SetMaxIdleConns(10)
 	config.SetMaxOpenConns(100)
 
+	return nil
+
 }
 
-//Singleton
-func GetDatabase() *gorm.DB {
+func GetDatabase() (*gorm.DB, error) {
 	if db == nil {
-		StartDB()
+		return nil, errors.New("FAILED TO RETRIEVE DATABASE")
 	}
-	return db
+	return db, nil
 }
