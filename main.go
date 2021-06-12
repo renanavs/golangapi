@@ -3,23 +3,23 @@ package main
 import (
 	"log"
 	"projectapi/database"
-	"projectapi/migration"
+	"projectapi/database/migration"
 	"projectapi/server"
 )
 
 func main() {
 	err := database.StartDB()
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
+	logError(err)
 	database, err := database.GetDatabase()
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
+	logError(err)
 	err = migration.RunMigrations(database)
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
+	logError(err)
 	server := server.NewServer()
 	server.Run()
+}
+
+func logError(err error) {
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
 }

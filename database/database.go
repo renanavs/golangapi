@@ -34,7 +34,7 @@ func StartDB() error {
 
 func GetDatabase() (*gorm.DB, error) {
 	if db == nil {
-		return nil, errors.New("FAILED TO RETRIEVE DATABASE")
+		return db, errors.New("FAILED TO RECEIVE DATABASE CONNECTION")
 	}
 	return db, nil
 }
