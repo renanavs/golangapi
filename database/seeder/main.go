@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"projectapi/crypt"
 	"projectapi/database"
 	"projectapi/database/migration"
 	"projectapi/model"
@@ -31,6 +32,11 @@ func main() {
 	migration.RunMigrations(db)
 	if err != nil {
 		log.Fatalln(err.Error())
+	}
+
+	for index, user := range users {
+		user.ChangePassword(user.Password, &crypt.BCrypt{})
+		users[index] = user
 	}
 
 	db.Create(&users)

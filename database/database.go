@@ -12,7 +12,7 @@ import (
 var db *gorm.DB
 
 func StartDB() error {
-	dsn := "root@tcp(127.0.0.1:3306)/projectapi"
+	dsn := "root@tcp(127.0.0.1:3306)/projectapi?parseTime=true"
 	database, err := gorm.Open(mysql.Open(dsn))
 
 	if err != nil {
