@@ -24,5 +24,7 @@ func configRoutes(router *gin.Engine) *gin.Engine {
 	// config routes
 	CRUD(router, "entity", controller.BasicController{})
 
+	CRUD(router, "user", controller.UserController{})
+
 	return router
 }
