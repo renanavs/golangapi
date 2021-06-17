@@ -22,7 +22,7 @@ func CRUD(router *gin.Engine, prefix string, iController controller.Controller) 
 func configRoutes(router *gin.Engine) *gin.Engine {
 
 	// config routes
-	CRUD(router, "entity", controller.BasicController{})
+	// CRUD(router, "entity", controller.BasicController{})
 
 	CRUD(router, "user", controller.UserController{})
 

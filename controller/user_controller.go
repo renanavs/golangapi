@@ -13,16 +13,18 @@ import (
 type UserController struct {
 }
 
-const MSG_DATABASE_CONNECTION = "Failed to receive database connection"
-const MSG_JSON_BIND = "Cannot bind to json"
-const MSG_MISSING_ID = "Id must be defined"
-const MSG_ID_INTEGER = "Id must be numeric"
-const MSG_CREATE_USER = "Cannot create user"
-const MSG_LIST_USER = "Cannot create user"
-const MSG_FIND_BY_ID = "Cannot find user"
-const MSG_UPDATE_ERROR = "Cannot update user"
-const MSG_DELETE_ERROR = "Cannot delete user"
-const MSG_DELETED = "User Deleted"
+const (
+	MSG_DATABASE_CONNECTION string = "Failed to receive database connection"
+	MSG_JSON_BIND           string = "Cannot bind to json"
+	MSG_MISSING_ID          string = "Id must be defined"
+	MSG_ID_INTEGER          string = "Id must be numeric"
+	MSG_CREATE_USER         string = "Cannot create user"
+	MSG_LIST_USER           string = "Cannot create user"
+	MSG_FIND_BY_ID          string = "Cannot find user"
+	MSG_UPDATE_ERROR        string = "Cannot update user"
+	MSG_DELETE_ERROR        string = "Cannot delete user"
+	MSG_DELETED             string = "User Deleted"
+)
 
 func (controller UserController) List(c *gin.Context) {
 	db, err := database.GetDatabase()
@@ -160,7 +162,7 @@ func (controller UserController) Update(c *gin.Context) {
 		})
 		return
 	}
-	err = db.First(&user, user.ID).Error
+	err = db.First(&user, user_id).Error
 	if err != nil {
 		log.Println(err.Error())
 		c.JSON(http.StatusBadRequest, gin.H{
